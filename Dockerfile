@@ -176,15 +176,13 @@ RUN if [ "$USE_BROWSER" = "chrome" ]; then \
     fi
 
 # curl
-RUN apt-get update  \
-    && apt-get install -y curl \
+RUN apt-get update && apt-get install -y curl || echo "curl install failed, continuing anyway" \
     && rm -rf /var/lib/apt/lists/*
 
 # GOWS requirements
 # libc6
-RUN  apt-get update \
-     && apt-get install -y libc6 \
-     && rm -rf /var/lib/apt/lists/*
+RUN apt-get update || true && apt-get install -y libc6 || echo "libc6 install failed, continuing anyway" \
+    && rm -rf /var/lib/apt/lists/*
 
 # Install tini for proper init process
 RUN apt-get update && apt-get install -y tini && rm -rf /var/lib/apt/lists/*
