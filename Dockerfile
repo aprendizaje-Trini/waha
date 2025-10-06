@@ -192,7 +192,8 @@ ENV WHATSAPP_DEFAULT_ENGINE=$WHATSAPP_DEFAULT_ENGINE
 
 # Attach sources, install packages
 WORKDIR /app
-COPY package.json ./
+RUN mkdir -p /app && chown -R node:node /app
+COPY --chown=node:node package.json ./
 COPY --from=build /git/node_modules ./node_modules
 COPY --from=build /git/dist ./dist
 COPY --from=dashboard /dashboard ./dist/dashboard
