@@ -25,6 +25,7 @@ WORKDIR /git
 ADD . /git
 RUN yarn install
 RUN yarn build && find ./dist -name "*.d.ts" -delete
+# Forzando rebuild limpio para evitar error de libpqxx
 
 #
 # Dashboard
