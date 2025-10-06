@@ -55,7 +55,7 @@ RUN \
 #
 # GOWS
 #
-FROM golang:${GOLANG_IMAGE_TAG} AS gows
+FROM golang:1.20-bullseye AS gows
 
 # jq to parse json
 RUN apt-get update && apt-get install -y jq && rm -rf /var/lib/apt/lists/*
