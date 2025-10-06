@@ -70,6 +70,7 @@ RUN apt-get update  \
     && rm -rf /var/lib/apt/lists/*
 
 COPY waha.config.json /tmp/waha.config.json
+ENV GOPROXY=direct
 WORKDIR /go/gows
 RUN \
     GOWS_GITHUB_REPO=$(jq -r '.waha.gows.repo' /tmp/waha.config.json) && \
