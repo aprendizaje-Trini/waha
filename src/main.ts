@@ -98,7 +98,7 @@ async function bootstrap() {
   AppModule.appReady(app, logger);
   app.enableShutdownHooks();
   const config = app.get(WhatsappConfigService);
-  await app.listen(config.port);
+  await app.listen(config.port, '0.0.0.0');
   logger.info(`WhatsApp HTTP API is running on: ${await app.getUrl()}`);
   logger.info(VERSION, 'Environment');
 }
