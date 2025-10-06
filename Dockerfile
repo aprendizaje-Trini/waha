@@ -18,7 +18,7 @@ RUN apt-get update && apt-get install -y git
 
 RUN npm install -g corepack && corepack enable
 RUN yarn set version 3.6.3
-RUN yarn install
+RUN yarn install --legacy-peer-deps
 
 # App
 WORKDIR /git
