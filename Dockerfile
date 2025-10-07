@@ -1,6 +1,7 @@
 ARG NODE_IMAGE_TAG=22.16-slim
 ARG GOLANG_IMAGE_TAG=1.20-slim
 
+
 #
 # Build
 #
