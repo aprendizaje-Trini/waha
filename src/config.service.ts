@@ -24,12 +24,13 @@ export class WhatsappConfigService implements OnApplicationBootstrap {
     return this.configService.get('WHATSAPP_API_HOSTNAME', 'localhost');
   }
 
-  get port(): string {
-    if (this.configService.get('PORT')) {
-      return this.configService.get('PORT');
-    }
-    return this.configService.get('WHATSAPP_API_PORT', '3000');
+  get port(): number {
+  const port = this.configService.get('PORT');
+  if (port) {
+    return parseInt(port, 10);
   }
+  return parseInt(this.configService.get('WHATSAPP_API_PORT', '3000'), 10);
+}
 
   get baseUrl(): string {
     let baseUrl = this.configService.get('WAHA_BASE_URL', '');
