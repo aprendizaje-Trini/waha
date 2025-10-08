@@ -1,3 +1,8 @@
+import express from 'express';
+import { ExpressAdapter } from '@nestjs/platform-express';
+
+const expressApp = express();
+
 import { NestFactory } from '@nestjs/core';
 import { WsAdapter } from '@nestjs/platform-ws';
 import { WAHA_WEBHOOKS } from '@waha/structures/webhooks';
@@ -68,12 +73,12 @@ async function bootstrap() {
   logger.info(`WAHA (WhatsApp HTTP API) - Running ${version} version...`);
   const AppModule = await loadModules();
   const httpsOptions = AppModule.getHttpsOptions(logger);
-  const app = await NestFactory.create(AppModule, {
-    logger: getNestJSLogLevels(),
-    httpsOptions: httpsOptions,
-    bufferLogs: true,
-    forceCloseConnections: true,
-  });
+  const app = await NestFactory.create(AppModuleCore, new ExpressAdapter(expressApp), {
+  logger: getNestJSLogLevels(),
+  httpsOptions,
+  bufferLogs: true,
+  forceCloseConnections: true,
+});
   app.useLogger(app.get(NestJSPinoLogger));
 
   // Print the original stack, not pino one
@@ -105,13 +110,12 @@ logger.info(`⚡ Intentando escuchar en 0.0.0.0:${config.port}`);
 // });
 
 
-const expressApp = app.getHttpAdapter().getInstance();
-expressApp.get('/', (req, res) => {
-  res.send('WAHA is running 🚀');
-});
 
 
 logger.info(`✅ WAHA escuchando en ${config.port}`);
+expressApp.get('/', (_, res) => {
+  res.send('WAHA is running 🚀');
+});
 await app.listen(config.port, '0.0.0.0');
 logger.info(`✅ WAHA escuchando en ${config.port} desde 0.0.0.0`);
 logger.info(`✅ WAHA debería estar accesible públicamente`);
