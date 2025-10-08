@@ -104,6 +104,13 @@ logger.info(`⚡ Intentando escuchar en 0.0.0.0:${config.port}`);
 //   res.send('WAHA is running 🚀');
 // });
 
+
+const expressApp = app.getHttpAdapter().getInstance();
+expressApp.get('/', (req, res) => {
+  res.send('WAHA is running 🚀');
+});
+
+
 await app.listen(config.port, '0.0.0.0');
   logger.info(`✅ WAHA debería estar accesible públicamente`);
   logger.info(`WhatsApp HTTP API is running on: ${await app.getUrl()}`);
