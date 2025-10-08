@@ -96,13 +96,15 @@ async function bootstrap() {
   swaggerConfigurator.configure(WAHA_WEBHOOKS);
 
   AppModule.appReady(app, logger);
-  app.enableShutdownHooks();
-  const config = app.get(WhatsappConfigService);
-  logger.info(`⚡ Intentando escuchar en 0.0.0.0:${config.port}`);
-  app.get('/', (req, res) => {
-  res.send('WAHA is running 🚀');
-});
-  await app.listen(config.port, '0.0.0.0');
+app.enableShutdownHooks();
+const config = app.get(WhatsappConfigService);
+logger.info(`⚡ Intentando escuchar en 0.0.0.0:${config.port}`);
+
+// app.get('/', (req, res) => {
+//   res.send('WAHA is running 🚀');
+// });
+
+await app.listen(config.port, '0.0.0.0');
   logger.info(`✅ WAHA debería estar accesible públicamente`);
   logger.info(`WhatsApp HTTP API is running on: ${await app.getUrl()}`);
   logger.info(VERSION, 'Environment');
