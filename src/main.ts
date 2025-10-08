@@ -111,6 +111,7 @@ expressApp.get('/', (req, res) => {
 });
 
 
+logger.info(`✅ WAHA escuchando en ${config.port}`);
 await app.listen(config.port, '0.0.0.0');
   logger.info(`✅ WAHA debería estar accesible públicamente`);
   logger.info(`WhatsApp HTTP API is running on: ${await app.getUrl()}`);
