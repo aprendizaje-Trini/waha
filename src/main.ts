@@ -115,7 +115,7 @@ logger.info(`✅ WAHA escuchando en ${config.port}`);
 await app.listen(config.port, '0.0.0.0');
 logger.info(`✅ WAHA escuchando en ${config.port} desde 0.0.0.0`);
 logger.info(`✅ WAHA debería estar accesible públicamente`);
-logger.info(`WhatsApp HTTP API is running on: ${await app.getUrl()}`);
+logger.info(`WhatsApp HTTP API is running on: http://0.0.0.0:${config.port}`);
 logger.info(VERSION, 'Environment');
 }
 
